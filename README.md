@@ -1,4 +1,4 @@
-# py-hegel-amplifier
+# hegel-ip-client
 
 Python client library for Hegel amplifiers with async support and push notifications.
 
@@ -13,14 +13,14 @@ Python client library for Hegel amplifiers with async support and push notificat
 ## Installation
 
 ```bash
-pip install py-hegel-amplifier
+pip install hegel-ip-client
 ```
 
 ## Quick Start
 
 ```python
 import asyncio
-from py_hegel_amplifier import HegelClient, COMMANDS
+from hegel_ip_client import HegelClient, COMMANDS
 
 async def main():
     # Create client
@@ -125,4 +125,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Support
 
-For issues and feature requests, please use the [GitHub issue tracker](https://github.com/boazca/py-hegel-amplifier/issues).
+For issues and feature requests, please use the [GitHub issue tracker](https://github.com/boazca/hegel-ip-client/issues).

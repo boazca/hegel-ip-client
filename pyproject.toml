@@ -3,7 +3,7 @@ requires = ["setuptools>=61.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "py-hegel-amplifier"
+name = "hegel-ip-client"
 version = "0.1.0"
 description = "Python client library for Hegel amplifiers"
 readme = "README.md"
@@ -23,9 +23,9 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/boazca/py-hegel-amplifier"
-"Bug Reports" = "https://github.com/boazca/py-hegel-amplifier/issues"
-"Source" = "https://github.com/boazca/py-hegel-amplifier"
+"Homepage" = "https://github.com/boazca/hegel-ip-client"
+"Bug Reports" = "https://github.com/boazca/hegel-ip-client/issues"
+"Source" = "https://github.com/boazca/hegel-ip-client"
 
 [tool.setuptools]
-packages = ["py_hegel_amplifier"]
+packages = ["hegel_ip_client"]

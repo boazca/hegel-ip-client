@@ -1,4 +1,4 @@
 include README.md
 include LICENSE
 include pyproject.toml
-recursive-include py_hegel_amplifier *.py
+recursive-include hegel_ip_client *.py
