@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "py-hegel-amplifier"
+version = "0.1.0"
+description = "Python client library for Hegel amplifiers"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+keywords = ["hegel", "amplifier", "audio", "home-automation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Home Automation",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/boazca/py-hegel-amplifier"
+"Bug Reports" = "https://github.com/boazca/py-hegel-amplifier/issues"
+"Source" = "https://github.com/boazca/py-hegel-amplifier"
+
+[tool.setuptools]
+packages = ["py_hegel_amplifier"]
