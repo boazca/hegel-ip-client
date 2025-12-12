@@ -7,6 +7,7 @@ from .client import (
     parse_reply_message,
 )
 from .const import COMMANDS
+from .exceptions import HegelConnectionError, HegelError
 
 __all__ = [
     "HegelClient",
@@ -14,4 +15,6 @@ __all__ = [
     "parse_reply_message",
     "apply_state_changes",
     "COMMANDS",
+    "HegelError",
+    "HegelConnectionError",
 ]

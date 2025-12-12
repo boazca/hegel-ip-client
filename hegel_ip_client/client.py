@@ -9,6 +9,8 @@ from collections import deque
 from dataclasses import dataclass
 from typing import Any, Callable, Optional
 
+from .exceptions import HegelConnectionError
+
 _LOGGER = logging.getLogger(__name__)
 
 CR = "\r"
@@ -196,14 +198,16 @@ class HegelClient:
                 _LOGGER.debug("TX: %s", command_to_send.strip())
                 self._writer.write(command_to_send.encode())
                 await self._writer.drain()
-            except Exception as err:
+            except (OSError, ConnectionResetError, BrokenPipeError) as err:
                 _LOGGER.error("Send failed: %s", err)
                 # cleanup future
                 if fut and not fut.done():
                     fut.set_exception(err)
                 # close connection and raise so callers know
                 await self._close_connection()
-                raise
+                raise HegelConnectionError(
+                    f"Failed to send command to Hegel device: {err}"
+                ) from err
 
         # if caller didn't expect reply, return immediately
         if not fut:
@@ -266,7 +270,7 @@ class HegelClient:
                     await self._listen_task  # normal exit when disconnected
             except asyncio.CancelledError:
                 break
-            except Exception as err:
+            except HegelConnectionError as err:
                 _LOGGER.warning(
                     "Connection attempt failed: %s — retrying in %.1fs", err, backoff
                 )
@@ -285,11 +289,13 @@ class HegelClient:
             self._reader, self._writer = await asyncio.open_connection(
                 self._host, self._port
             )
-        except Exception as err:
+        except (OSError, asyncio.TimeoutError, ConnectionRefusedError) as err:
             # failed to connect — ensure state is clear and re-raise for manager to backoff
             self._connected_event.clear()
             _LOGGER.debug("Open connection failed: %s", err)
-            raise
+            raise HegelConnectionError(
+                f"Failed to connect to Hegel device at {self._host}:{self._port}: {err}"
+            ) from err
 
         self._connected_event.set()
         _LOGGER.info("Connected to Hegel at %s:%s", self._host, self._port)
